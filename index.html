@@ -47,7 +47,7 @@
 const esc=s=>(s||'').replace(/</g,'&lt;');
 const fmtx=f=>Object.entries(f).map(([k,v])=>k+'×'+v).join(' ')||'—';
 async function tick(){
- const j=await (await fetch('./status.json')).json();
+ const j=await (await fetch('./status.json?v='+Date.now(),{cache:'no-store'})).json();
  document.getElementById('sys').textContent=
   `tb ${j.tb} · 容器 ${j.containers} · 网络 ${j.networks}${j.networks>25?' ⚠':''} · 运行 ${Math.floor(j.elapsed_min/60)}h${String(Math.round(j.elapsed_min%60)).padStart(2,'0')}m`;
  document.getElementById('clock').textContent=j.ts;
